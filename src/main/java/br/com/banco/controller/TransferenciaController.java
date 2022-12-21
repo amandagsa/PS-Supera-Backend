@@ -18,9 +18,6 @@ import java.time.format.DateTimeFormatter;
 public class TransferenciaController {
 
     @Autowired
-    ContaService contaService;
-
-    @Autowired
     TransferenciaService transferenciaService;
 
     @GetMapping("/{id}")
