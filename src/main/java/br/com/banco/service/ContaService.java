@@ -14,13 +14,15 @@ public class ContaService {
     @Autowired
     ContaRepository contaRepository;
 
+    private String MESSAGE = "Conta não encontrada para o ID";
+
     public List<Conta> findAll() {
         return contaRepository.findAll();
     }
 
     public Conta findById(Long id) {
         return contaRepository.findById(id).orElseThrow(() -> {
-            throw new ResourcesNotFoundException("Conta não encontrada para o ID");
+            throw new ResourcesNotFoundException(MESSAGE);
         });
     }
 }
