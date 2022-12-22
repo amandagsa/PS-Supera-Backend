@@ -13,24 +13,17 @@ import java.util.List;
 public class TransferenciaService {
 
     @Autowired
-    ContaRepository contaRepository;
-
-    @Autowired
-    ContaService contaService;
-
-    @Autowired
     private TransferenciaRepository transferenciaRepository;
 
-    public List<Transferencia> findByContaId(Long idConta) {
-        return transferenciaRepository.findAllByConta(idConta);
+    public List<Transferencia> verifyHasOperator(Long id, LocalDateTime dataInicio, LocalDateTime dataFim, String operador) {
+        if (operador.isEmpty()) {
+            return findByContaIdAndDate(id, dataInicio, dataFim);
+        }
+        return findByContaIdAndDateAndOperator(id, dataInicio, dataFim, operador);
     }
 
     public List<Transferencia> findByContaIdAndDate(Long idConta, LocalDateTime dataInicio, LocalDateTime dataFim) {
         return transferenciaRepository.findAllByAccontAndDate(idConta, dataInicio, dataFim);
-    }
-
-    public List<Transferencia> findByContaIdAndOperator(Long idConta, String nomeOperadorTransacao) {
-        return transferenciaRepository.findAllByAccountAndOperator(idConta, nomeOperadorTransacao);
     }
 
     public List<Transferencia> findByContaIdAndDateAndOperator(Long idConta, LocalDateTime dataInicio, LocalDateTime dataFim, String nomeOperadorTransacao) {
