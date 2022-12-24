@@ -25,6 +25,6 @@ public class TransferenciaController {
         LocalDateTime dataInicio = LocalDateTime.parse(dataInicial);
         LocalDateTime dataFim = LocalDateTime.parse(dataFinal);
 
-        return ResponseEntity.status(HttpStatus.OK).body(transferenciaService.verifyHasOperator(id, dataInicio, dataFim, operador));
+        return ResponseEntity.status(HttpStatus.OK).body(transferenciaService.findTransferencias(id, dataInicio, dataFim, operador));
     }
 }
