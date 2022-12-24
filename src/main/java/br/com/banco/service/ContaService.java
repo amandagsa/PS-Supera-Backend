@@ -17,10 +17,7 @@ public class ContaService {
     @Autowired
     ContaRepository contaRepository;
 
-    @Autowired
-    TransferenciaService transferenciaService;
-
-    private String MESSAGE = "Conta não encontrada para o ID";
+    private final String MESSAGE = "Conta não encontrada para o ID";
 
     public List<Conta> findAll() {
         return contaRepository.findAll();
@@ -30,15 +27,5 @@ public class ContaService {
         return contaRepository.findById(idConta).orElseThrow(() -> {
             throw new ResourcesNotFoundException(MESSAGE);
         });
-    }
-
-    public Double findTotal(Long idConta, LocalDateTime dataInicio, LocalDateTime dataFim) {
-        List<Transferencia> listaTransferencias = transferenciaService.findByAccountIdAndDate(idConta, dataInicio, dataFim);
-        Double valorTotal = 0.0;
-
-        for (Transferencia transferencia : listaTransferencias) {
-            valorTotal += transferencia.getValor();
-        }
-        return valorTotal;
     }
 }
