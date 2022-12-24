@@ -18,7 +18,7 @@ public class Transferencia {
     private LocalDateTime dataTransferencia;
 
     @NotNull
-    @Column(name = "valor")
+    @Column(name = "valor", scale = 2)
     private Double valor;
 
     @NotNull
