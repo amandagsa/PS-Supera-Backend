@@ -1,7 +1,6 @@
 package br.com.banco.service;
 
 import br.com.banco.entity.Transferencia;
-import br.com.banco.repository.ContaRepository;
 import br.com.banco.repository.TransferenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,16 +16,16 @@ public class TransferenciaService {
 
     public List<Transferencia> verifyHasOperator(Long id, LocalDateTime dataInicio, LocalDateTime dataFim, String operador) {
         if (operador.isEmpty()) {
-            return findByContaIdAndDate(id, dataInicio, dataFim);
+            return findByAccountIdAndDate(id, dataInicio, dataFim);
         }
-        return findByContaIdAndDateAndOperator(id, dataInicio, dataFim, operador);
+        return findByAccountIdAndDateAndOperator(id, dataInicio, dataFim, operador);
     }
 
-    public List<Transferencia> findByContaIdAndDate(Long idConta, LocalDateTime dataInicio, LocalDateTime dataFim) {
-        return transferenciaRepository.findAllByAccontAndDate(idConta, dataInicio, dataFim);
+    public List<Transferencia> findByAccountIdAndDate(Long idConta, LocalDateTime dataInicio, LocalDateTime dataFim) {
+        return transferenciaRepository.findAllByAccountAndDate(idConta, dataInicio, dataFim);
     }
 
-    public List<Transferencia> findByContaIdAndDateAndOperator(Long idConta, LocalDateTime dataInicio, LocalDateTime dataFim, String nomeOperadorTransacao) {
+    public List<Transferencia> findByAccountIdAndDateAndOperator(Long idConta, LocalDateTime dataInicio, LocalDateTime dataFim, String nomeOperadorTransacao) {
         return transferenciaRepository.findAllByAccountAndDateAndOperator(idConta, dataInicio, dataFim, nomeOperadorTransacao);
     }
 }
